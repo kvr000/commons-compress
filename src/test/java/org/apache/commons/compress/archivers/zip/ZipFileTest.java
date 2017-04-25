@@ -40,6 +40,7 @@ import java.util.zip.ZipEntry;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.compress.utils.SeekableInMemoryByteChannel;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ZipFileTest {
@@ -396,6 +397,23 @@ public class ZipFileTest {
         t0.join();
         t1.join();
         assertEquals(2, passedCount.get());
+    }
+
+    /**
+     * Test correct population of header and data offsets.
+     */
+    @Test
+    public void testOffsets() throws Exception {
+        // mixed.zip contains both inflated and stored files
+        final File archive = getFile("mixed.zip");
+        try (ZipFile zf = new ZipFile(archive)) {
+            ZipArchiveEntry inflatedEntry = zf.getEntry("inflated.txt");
+            Assert.assertEquals(0x0000, inflatedEntry.getHeaderOffset());
+            Assert.assertEquals(0x0046, inflatedEntry.getDataOffset());
+            ZipArchiveEntry storedEntry = zf.getEntry("stored.txt");
+            Assert.assertEquals(0x5892, storedEntry.getHeaderOffset());
+            Assert.assertEquals(0x58d6, storedEntry.getDataOffset());
+        }
     }
 
     private void assertAllReadMethods(byte[] expected, ZipFile zipFile, ZipArchiveEntry entry) {
