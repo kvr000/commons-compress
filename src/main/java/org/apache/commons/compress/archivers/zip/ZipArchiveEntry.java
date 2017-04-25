@@ -89,8 +89,8 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     private byte[] rawName = null;
     private GeneralPurposeBit gpb = new GeneralPurposeBit();
     private static final ZipExtraField[] noExtraFields = new ZipExtraField[0];
-    private long headerOffset = -1;
-    private long dataOffset = -1;
+    private long headerOffset = OFFSET_UNKNOWN;
+    private long dataOffset = OFFSET_UNKNOWN;
 
 
     /**
@@ -681,22 +681,12 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
         return null;
     }
 
-    /**
-     * Returns the entry header offset, or -1 if unknown.
-     *
-     * @return
-     *      header offset, or -1 if unknown.
-     */
+    @Override
     public long getHeaderOffset() {
         return headerOffset;
     }
 
-    /**
-     * Returns the entry data stream offset, or -1 if unknown.
-     *
-     * @return
-     *      data offset, or -1 if unknown.
-     */
+    @Override
     public long getDataOffset() {
         return dataOffset;
     }

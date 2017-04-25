@@ -21,6 +21,7 @@ package org.apache.commons.compress.archivers.ar;
 import java.io.File;
 import java.util.Date;
 
+import org.apache.commons.compress.archivers.AbstractArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 
 /**
@@ -51,7 +52,7 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
  *
  * @Immutable
  */
-public class ArArchiveEntry implements ArchiveEntry {
+public class ArArchiveEntry extends AbstractArchiveEntry {
 
     /** The header for each entry */
     public static final String HEADER = "!<arch>\n";

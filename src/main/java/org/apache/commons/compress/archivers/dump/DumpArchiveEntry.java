@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.commons.compress.archivers.AbstractArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 
 /**
@@ -178,7 +180,7 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
  *
  * @NotThreadSafe
  */
-public class DumpArchiveEntry implements ArchiveEntry {
+public class DumpArchiveEntry extends AbstractArchiveEntry {
     private String name;
     private TYPE type = TYPE.UNKNOWN;
     private int mode;

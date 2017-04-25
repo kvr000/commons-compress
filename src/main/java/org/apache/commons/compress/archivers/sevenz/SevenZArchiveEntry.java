@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.TimeZone;
 
+import org.apache.commons.compress.archivers.AbstractArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 
 /**
@@ -31,7 +32,7 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
  * @NotThreadSafe
  * @since 1.6
  */
-public class SevenZArchiveEntry implements ArchiveEntry {
+public class SevenZArchiveEntry extends AbstractArchiveEntry {
     private String name;
     private boolean hasStream;
     private boolean isDirectory;

@@ -56,4 +56,23 @@ public interface ArchiveEntry {
      * @since 1.1
      */
     Date getLastModifiedDate();
+
+    /** Special value indicating that the offset is unknown. */
+    long OFFSET_UNKNOWN = -1;
+
+    /**
+     * Gets the offset of entry header within the archive.
+     *
+     * @return
+     *      the offset of entry header.
+     */
+    long getHeaderOffset();
+
+    /**
+     * Gets the offset of entry data stream within the archive.
+     *
+     * @return
+     *      the offset of entry data stream.
+     */
+    long getDataOffset();
 }

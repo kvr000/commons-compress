@@ -16,40 +16,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.commons.compress.archivers.memory;
+package org.apache.commons.compress.archivers;
 
-import java.util.Date;
 
-import org.apache.commons.compress.archivers.AbstractArchiveEntry;
-import org.apache.commons.compress.archivers.ArchiveEntry;
-
-public final class MemoryArchiveEntry extends AbstractArchiveEntry {
-
-    private final String name;
-
-    public MemoryArchiveEntry(final String pName) {
-        name = pName;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
+/**
+ * Partial implementation of {@link ArchiveEntry}, providing default values for optional functionality.
+ */
+public abstract class AbstractArchiveEntry implements ArchiveEntry
+{
     @Override
     public long getSize() {
-        // TODO Auto-generated method stub
-        return 0;
+        return SIZE_UNKNOWN;
     }
 
     @Override
-    public boolean isDirectory() {
-        // TODO Auto-generated method stub
-        return false;
+    public long getHeaderOffset() {
+        return OFFSET_UNKNOWN;
     }
 
     @Override
-    public Date getLastModifiedDate() {
-        return new Date();
+    public long getDataOffset() {
+        return OFFSET_UNKNOWN;
     }
 }
