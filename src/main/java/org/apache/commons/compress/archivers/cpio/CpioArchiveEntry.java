@@ -21,6 +21,7 @@ package org.apache.commons.compress.archivers.cpio;
 import java.io.File;
 import java.util.Date;
 
+import org.apache.commons.compress.archivers.AbstractArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 
 /**
@@ -143,7 +144,7 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
  * @NotThreadSafe
  * @see <a href="http://people.freebsd.org/~kientzle/libarchive/man/cpio.5.txt">http://people.freebsd.org/~kientzle/libarchive/man/cpio.5.txt</a>
  */
-public class CpioArchiveEntry implements CpioConstants, ArchiveEntry {
+public class CpioArchiveEntry extends AbstractArchiveEntry implements CpioConstants {
 
     // Header description fields - should be same throughout an archive
 

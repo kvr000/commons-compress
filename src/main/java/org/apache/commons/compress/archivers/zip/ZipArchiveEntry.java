@@ -89,6 +89,9 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
     private byte[] rawName = null;
     private GeneralPurposeBit gpb = new GeneralPurposeBit();
     private static final ZipExtraField[] noExtraFields = new ZipExtraField[0];
+    private long headerOffset = OFFSET_UNKNOWN;
+    private long dataOffset = OFFSET_UNKNOWN;
+
 
     /**
      * Creates a new zip entry with the specified name.
@@ -678,6 +681,36 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
         return null;
     }
 
+    @Override
+    public long getHeaderOffset() {
+        return headerOffset;
+    }
+
+    @Override
+    public long getDataOffset() {
+        return dataOffset;
+    }
+
+    /**
+     * Sets the header offset.
+     *
+     * @param headerOffset
+     *      new value of header offset.
+     */
+    protected void setHeaderOffset(long headerOffset) {
+        this.headerOffset = headerOffset;
+    }
+
+    /**
+     * Sets the data offset.
+     *
+     * @param dataOffset
+     *      new value of data offset.
+     */
+    protected void setDataOffset(long dataOffset) {
+        this.dataOffset = dataOffset;
+    }
+
     /**
      * Get the hashCode of the entry.
      * This uses the name as the hashcode.
@@ -801,6 +834,8 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
                              other.getCentralDirectoryExtra())
             && Arrays.equals(getLocalFileDataExtra(),
                              other.getLocalFileDataExtra())
+            && headerOffset == other.headerOffset
+            && dataOffset == other.dataOffset
             && gpb.equals(other.gpb);
     }
 

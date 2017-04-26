@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.compress.archivers.AbstractArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipEncoding;
 import org.apache.commons.compress.utils.ArchiveUtils;
@@ -142,7 +143,7 @@ import org.apache.commons.compress.utils.ArchiveUtils;
  * @NotThreadSafe
  */
 
-public class TarArchiveEntry implements TarConstants, ArchiveEntry {
+public class TarArchiveEntry extends AbstractArchiveEntry implements TarConstants {
     private static final TarArchiveEntry[] EMPTY_TAR_ARCHIVE_ENTRIES = new TarArchiveEntry[0];
 
     /** The entry's name. */
