@@ -48,6 +48,7 @@ public class SevenZArchiveEntry extends AbstractArchiveEntry {
     private boolean hasCrc;
     private long crc, compressedCrc;
     private long size, compressedSize;
+    private long headerOffset = -1, dataOffset = -1;
     private Iterable<? extends SevenZMethodConfiguration> contentMethods;
     
     public SevenZArchiveEntry() {
@@ -438,6 +439,36 @@ public class SevenZArchiveEntry extends AbstractArchiveEntry {
      */
     void setCompressedSize(final long size) {
         this.compressedSize = size;
+    }
+
+    @Override
+    public long getHeaderOffset() {
+        return headerOffset;
+    }
+
+    @Override
+    public long getDataOffset() {
+        return dataOffset;
+    }
+
+    /**
+     * Sets the header offset.
+     *
+     * @param headerOffset
+     *      new value of header offset.
+     */
+    protected void setHeaderOffset(long headerOffset) {
+        this.headerOffset = headerOffset;
+    }
+
+    /**
+     * Sets the data offset.
+     *
+     * @param dataOffset
+     *      new value of data offset.
+     */
+    protected void setDataOffset(long dataOffset) {
+        this.dataOffset = dataOffset;
     }
 
     /**

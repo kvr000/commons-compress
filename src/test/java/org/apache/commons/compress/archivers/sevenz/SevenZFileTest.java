@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -278,6 +279,23 @@ public class SevenZFileTest extends AbstractTestCase {
                 entry = sevenZFile.getNextEntry();
             }
             assertEquals(5, entries);
+        }
+    }
+
+    @Test
+    public void readMixed() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 10000; ++i) {
+            sb.append(i).append('\n');
+        }
+        String expected = sb.toString();
+        try (SevenZFile sevenZFile = new SevenZFile(getFile("mixed.7z"))) {
+            SevenZArchiveEntry entry;
+            while ((entry = sevenZFile.getNextEntry()) != null) {
+                byte[] content = readFully(sevenZFile);
+                String stringContent = new String(content, Charset.forName("UTF-8"));
+                assertEquals(expected, stringContent);
+            }
         }
     }
     
